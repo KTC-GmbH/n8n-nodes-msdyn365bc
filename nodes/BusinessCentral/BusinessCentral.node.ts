@@ -16,7 +16,7 @@ export class BusinessCentral implements INodeType {
 		outputs: [NodeConnectionType.Main],
 		credentials: [
 			{
-				name: 'businessCentralOAuth2Api',
+				name: 'BusinessCentralApi',
 				required: true,
 			},
 		],
@@ -40,7 +40,7 @@ export class BusinessCentral implements INodeType {
 		// const items = this.getInputData();
 		const returnData = [];
 
-		const credentials = await this.getCredentials('businessCentralOAuth2Api');
+		const credentials = await this.getCredentials('BusinessCentralApi');
 
 		const tenantId = credentials.tenantId as string;
 		const environment = credentials.environment as string;
@@ -51,7 +51,7 @@ export class BusinessCentral implements INodeType {
 		try {
 			const responseData = await this.helpers.httpRequestWithAuthentication.call(
 				this,
-				'businessCentralOAuth2Api',
+				'BusinessCentralApi',
 				{ method: 'GET', url, json: true },
 			);
 

@@ -1,24 +1,7 @@
 {
 	"name": "n8n-msdyn365bc",
 	"version": "1.0.0",
-	"description": "",
-	"keywords": [
-		"n8n-msdyn365bc",
-		"n8n-businessCentral"
-	],
-	"license": "MIT",
-	"homepage": "",
-	"author": {
-		"name": "",
-		"email": ""
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/KTC-GmbH/n8n-msdyn365bc"
-	},
-	"engines": {
-		"node": ">=20.15"
-	},
+	"description": "n8n node for Microsoft Dynamics 365 Business Central",
 	"main": "index.js",
 	"scripts": {
 		"build": "npx rimraf dist && tsc && gulp build:icons",
@@ -34,7 +17,7 @@
 	"n8n": {
 		"n8nNodesApiVersion": 1,
 		"credentials": [
-			"dist/credentials/BusinessCentralOAuth2Api.credentials.js"
+			"dist/credentials/BusinessCentralOAuth2.credentials.js"
 		],
 		"nodes": [
 			"dist/nodes/BusinessCentral/BusinessCentral.node.js"

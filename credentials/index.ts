@@ -1,1 +1,1 @@
-export * from './BusinessCentralOAuth2.credentials';
+export * from './BusinessCentralApi.credentials';
