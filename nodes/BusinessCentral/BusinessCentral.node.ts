@@ -4,62 +4,67 @@ import { IExecuteFunctions } from 'n8n-workflow';
 export class BusinessCentral implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Business Central',
+		subtitle: '={{ $parameter["operation"] + ": " + $parameter["resource"] }}',
 		name: 'businessCentral',
 		icon: 'file:businesscentral.svg',
 		group: ['transform'],
 		version: 1,
 		description: 'Interact with Microsoft Dynamics 365 Business Central',
-		defaults: {
-			name: 'Business Central',
-		},
+		defaults: { name: 'Business Central' },
 		inputs: [NodeConnectionType.Main],
 		outputs: [NodeConnectionType.Main],
-		credentials: [
-			{
-				name: 'BusinessCentralApi',
-				required: true,
-			},
-		],
+		credentials: [{ name: 'businessCentralApi', required: true }],
 		properties: [
 			{
 				displayName: 'Operation',
 				name: 'operation',
 				type: 'options',
-				options: [
-					{
-						name: 'Get Customers',
-						value: 'getCustomers',
-					},
-				],
+				noDataExpression: true,
+				options: [{ name: 'Get Customers', value: 'getCustomers' }],
 				default: 'getCustomers',
 			},
 		],
 	};
 
 	async execute(this: IExecuteFunctions) {
-		// const items = this.getInputData();
 		const returnData = [];
+		const operation = this.getNodeParameter('operation', 0) as string;
 
-		const credentials = await this.getCredentials('BusinessCentralApi');
+		if (operation === 'getCustomers') {
+			const credentials = await this.getCredentials('businessCentralApi');
+			const tenantId = credentials.tenantId as string;
+			const environment = (credentials.environmentName || credentials.environment) as string;
+			const companyId = credentials.companyId as string;
 
-		const tenantId = credentials.tenantId as string;
-		const environment = credentials.environment as string;
-		const companyId = credentials.companyId as string;
+			const url = `https://api.businesscentral.dynamics.com/v2.0/${tenantId}/${environment}/ODataV4/Company('${companyId}')/workflowCustomers`;
 
-		const url = `https://api.businesscentral.dynamics.com/v2.0/${tenantId}/${environment}/ODataV4/Company('${companyId}')/customers`;
+			let lastError;
 
-		try {
-			const responseData = await this.helpers.httpRequestWithAuthentication.call(
-				this,
-				'BusinessCentralApi',
-				{ method: 'GET', url, json: true },
-			);
+			try {
+				const responseData = await this.helpers.httpRequestWithAuthentication.call(
+					this,
+					'businessCentralApi',
+					{ method: 'GET', url, json: true },
+				);
 
-			for (const customer of responseData.value) {
-				returnData.push({ json: customer });
+				if (responseData.value && Array.isArray(responseData.value)) {
+					for (const customer of responseData.value) {
+						returnData.push({ json: customer });
+					}
+					return [returnData];
+				}
+			} catch (error) {
+				console.log('Attempt failed:', error.message);
+				lastError = error;
 			}
-		} catch (error) {
-			throw new NodeApiError(this.getNode(), error);
+
+			if (lastError) {
+				throw new NodeApiError(this.getNode(), lastError, {
+					message: 'All API endpoint attempts failed',
+					description: 'Tried multiple endpoint formats without success',
+					httpCode: lastError.response?.status?.toString() || 'Unknown',
+				});
+			}
 		}
 
 		return [returnData];
