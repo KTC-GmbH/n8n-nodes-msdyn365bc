@@ -23,6 +23,19 @@ export class BusinessCentral implements INodeType {
 				options: [{ name: 'Get Customers', value: 'getCustomers' }],
 				default: 'getCustomers',
 			},
+			{
+				displayName: 'Service Name',
+				name: 'serviceName',
+				type: 'string',
+				default: 'workflowCustomers',
+				description: 'Service path used in the API URL (e.g. workflowCustomers)',
+				displayOptions: {
+					show: {
+						operation: ['getCustomers'],
+					},
+				},
+				required: true,
+			},
 		],
 	};
 
@@ -31,12 +44,13 @@ export class BusinessCentral implements INodeType {
 		const operation = this.getNodeParameter('operation', 0) as string;
 
 		if (operation === 'getCustomers') {
+			const serviceName = this.getNodeParameter('serviceName', 0) as string;
 			const credentials = await this.getCredentials('businessCentralApi');
 			const tenantId = credentials.tenantId as string;
 			const environment = (credentials.environmentName || credentials.environment) as string;
 			const companyId = credentials.companyId as string;
 
-			const url = `https://api.businesscentral.dynamics.com/v2.0/${tenantId}/${environment}/ODataV4/Company('${companyId}')/workflowCustomers`;
+			const url = `https://api.businesscentral.dynamics.com/v2.0/${tenantId}/${environment}/ODataV4/Company('${companyId}')/${serviceName}`;
 
 			let lastError;
 
