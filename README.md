@@ -93,8 +93,8 @@ npm install n8n-nodes-msdyn365bc
 ### Option 3: Manual Installation (Development)
 
 ```bash
-git clone https://github.com/[your-username]/n8n-msdyn365bc.git
-cd n8n-msdyn365bc
+git clone https://github.com/[your-username]/n8n-nodes-msdyn365bc.git
+cd n8n-nodes-msdyn365bc
 npm install
 npm run build
 npm link
