@@ -1,4 +1,4 @@
-# n8n-msdyn365bc
+# n8n-nodes-msdyn365bc
 
 <div align="center">
   <img src="https://img.shields.io/badge/n8n-Community%20Node-ff5b85?style=for-the-badge&logo=n8n" alt="n8n Community Node">
@@ -88,7 +88,8 @@ npm install n8n-nodes-msdyn365bc
 3. Click **Install a community node**
 4. Enter `n8n-nodes-msdyn365bc`
 5. Click **Install**
-
+6. If you need help with that, check the <a href="https://docs.n8n.io/integrations/community-nodes/installation/gui-install/" rel="nofollow"><strong>Install community nodes</strong></a>
+   
 ### Option 3: Manual Installation (Development)
 
 ```bash
@@ -314,8 +315,6 @@ n8n start
 </div>
 
 We welcome contributions! Please read our [Contributing Guidelines](CONTRIBUTING.md) before creating a pull request.
-
-**💡 Want to contribute professionally?** We're always looking for talented AL developers to join our team! Check out our [career opportunities](#-join-our-team) below.
 
 ### 🚀 Development Guidelines
 
