@@ -1,5 +1,5 @@
 {
-	"name": "n8n-msdyn365bc",
+	"name": "n8n-nodes-msdyn365bc",
 	"version": "1.1.0",
 	"description": "An n8n integration node for Microsoft Dynamics 365 Business Central",
 	"keywords": [
@@ -8,20 +8,24 @@
 		"n8n-nodes-msdyn365bc",
 		"microsoft",
 		"business-central",
+		"n8n-business-central",
+		"n8n-nodes-business-central",
 		"dynamics365",
 		"d365",
+		"d365bc",
 		"msdyn365bc",
+		"n8n-community-node-d365bc",
 		"n8n-community-node-package"
 	],
 	"license": "MIT",
-	"homepage": "https://github.com/KTC-GmbH/n8n-msdyn365bc",
+	"homepage": "https://github.com/KTC-GmbH/n8n-nodes-msdyn365bc",
 	"author": {
 		"name": "KTC GmbH",
 		"email": "support@ktc.de"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/KTC-GmbH/n8n-msdyn365bc"
+		"url": "https://github.com/KTC-GmbH/n8n-nodes-msdyn365bc"
 	},
 	"engines": {
 		"node": ">=20.15"
