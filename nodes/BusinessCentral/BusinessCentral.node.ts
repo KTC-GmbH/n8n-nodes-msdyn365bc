@@ -20,8 +20,8 @@ export class BusinessCentral implements INodeType {
 				name: 'operation',
 				type: 'options',
 				noDataExpression: true,
-				options: [{ name: 'Get Customers', value: 'getCustomers' }],
-				default: 'getCustomers',
+				options: [{ name: 'Web Services', value: 'webServices' }],
+				default: 'webServices',
 			},
 			{
 				displayName: 'Service Name',
@@ -31,7 +31,7 @@ export class BusinessCentral implements INodeType {
 				description: 'Service path used in the API URL (e.g. workflowCustomers)',
 				displayOptions: {
 					show: {
-						operation: ['getCustomers'],
+						operation: ['webServices'],
 					},
 				},
 				required: true,
@@ -43,7 +43,7 @@ export class BusinessCentral implements INodeType {
 		const returnData = [];
 		const operation = this.getNodeParameter('operation', 0) as string;
 
-		if (operation === 'getCustomers') {
+		if (operation === 'webServices') {
 			const serviceName = this.getNodeParameter('serviceName', 0) as string;
 			const credentials = await this.getCredentials('businessCentralApi');
 			const tenantId = credentials.tenantId as string;
