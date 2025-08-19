@@ -45,7 +45,7 @@
 	"n8n": {
 		"n8nNodesApiVersion": 1,
 		"credentials": [
-			"dist/credentials/BusinessCentralOAuth2.credentials.js"
+			"dist/credentials/BusinessCentralApi.credentials.js"
 		],
 		"nodes": [
 			"dist/nodes/BusinessCentral/BusinessCentral.node.js"
