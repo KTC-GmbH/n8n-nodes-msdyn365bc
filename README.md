@@ -51,7 +51,7 @@ This n8n node enables seamless integration of Microsoft Dynamics 365 Business Ce
   </tr>
   <tr>
     <td align="center">📝</td>
-    <td><strong>CRUD Operations</strong><br>Create, Read, Update, and Delete records</td>
+    <td><strong>CRUD Operations</strong><br>Create, Read, Update, and Delete records. Currently only read is supported.</td>
   </tr>
   <tr>
     <td align="center">🔐</td>
